@@ -1,0 +1,56 @@
+<div class="wrapper">
+
+  <div class="container shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div class="row">
+      <div class="col-sm-12 ">
+        <h1 class="text-white  bg-dark text-center rounded my-title border-bottom">
+          Spatial Bloom Filter
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="text-justify">
+          Spatial Bloom Filter (SBF) is a novel data structure based on the Bloom filters.
+          Similarly to a classical BF, a SBF is a space-efficient probablistic data structures used to test whether an element
+          is a member of a set. SBF improves this feature allowing the use of more than one set.
+          That is, with the SBF it is possible identify the specific set of an element over multiple sets (possibly an unlimited number).
+          The SBF retains all the properties of teh BF like</p>
+          <ul>
+            <li>constant time for write and read of a filter's element</li>
+            <li>memory usage optimization</li>
+            <li>usage of metrics to setup the filter (false positive rate)</li>
+          </ul>
+        <p class="text-justify">
+          Moreover the SBF introduce two more metrics: <em>Emersion</em> and <em>Safeness</em>.
+          The SBF is specifically designed to deal with location information to keep private.
+          However this data structure is suitable for any kind of set-based problem.
+        </p>
+
+        <h2>Synopsis</h2>
+        <p>
+        The Spatial Bloom Filters (SBF) are a compact, set-based data structure that extends the original Bloom filter concept.
+        An SBF represents and arbitrary number of sets, and their respective elements (as opposed to Bloom filters, which represent the elements of a single set).
+        SBFs are particularly suited to be used in privacy-preserving protocols,
+        as set-membership queries (i.e. the process of verifying if an element is in a set) can be easily computed over an encrypted SBF,
+        through (somewhat) homomorphic encryption.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col align-self-center">
+        <button routerLink="dashboard" routerLinkActive="true" type="button" class="btn btn-secondary btn-lg btn-block btn-dark">
+          Let's try
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+

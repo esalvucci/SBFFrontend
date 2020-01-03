@@ -1,0 +1,18 @@
+<div id="mySidenav" class="sidenav bg-dark">
+
+  <div class="container">
+
+    <div class="row justify-content-end">
+      <div class="sidebar-header text-white ">
+        <button (click)="manageNav()" class="btn-dark btn-lg btn-link text-white shadow-none">
+          <span [hidden]="!open" id="navText">Filter Settings  &nbsp;</span>
+          <i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+
+    <div class="row ">
+      <app-filter-parameters class="m1"  [hidden]="!open" ></app-filter-parameters>
+    </div>
+  </div>
+
+</div>

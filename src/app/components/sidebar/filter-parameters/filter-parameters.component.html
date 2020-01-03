@@ -1,0 +1,73 @@
+<div class="container  p-2">
+  <div class="input-group mb-3 pt-3 flex-column">
+
+    <div class="form-group">
+      <p class="text-white"><b>Load dataset</b></p>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="dataSet" (change)="setElemDataSet($event)">
+        <label class="custom-file-label" for="dataSet" >{{dataSetName}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="text-white"><b>Load non element data set</b></p>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="nonElem" (change)="setNonElemDataSet($event)">
+        <label class="custom-file-label" for="nonElem" >{{nonELemName}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="text-white"><b>Hash function type</b></p>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{hashFunction}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" (click)="selectHashFunction($event)">
+          <button class="dropdown-item" type="button" value="1">SHA1</button>
+          <button class="dropdown-item" type="button" value="4">MD4</button>
+          <button class="dropdown-item" type="button" value="5">MD5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="text-white"><b>Hash salt</b></p>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="salt" (change)="setHashSalt($event)">
+        <label class="custom-file-label" for="salt" >{{saltName}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputP" class=" text-white"><b>p</b> &nbsp; Probability of False positive</label>
+      <input [(ngModel)]="filter.p" #ctrl="ngModel" id="inputP" type="number" min=0 class="form-control"
+             aria-label="False positive rate" aria-describedby="inputGroup-sizing-default" >
+    </div>
+
+    <div class="form-group">
+      <label for="inputM" class=" text-white"><b>m</b> &nbsp; Number of bits in the filter</label>
+      <input [(ngModel)]="filter.m" #ctrl="ngModel" id="inputM" type="number" min=0 class="form-control"
+             aria-label="number of filter's bits" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div class="form-group">
+      <label for="inputK" class=" text-white"><b>k</b> &nbsp; Number of hash functions</label>
+      <input [(ngModel)]="filter.k" #ctrl="ngModel" id="inputK" type="number" min=0 class="form-control"
+             aria-label="number of hash functions" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-6 ">
+      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn"
+              [disabled]="!canCalculate()" (click)="calculate()">
+        Calculate filter
+      </button>
+    </div>
+  </div>
+
+</div>
+
+

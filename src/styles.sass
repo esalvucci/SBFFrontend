@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+$ionicons-font-path: "~ionicons/dist/fonts"
+@import "~ionicons/dist/scss/ionicons.scss"
+$icon-font-path: '~open-iconic/font/fonts/'
+@import "~open-iconic/font/css/open-iconic-bootstrap.scss"
+
+$hover-color: #36bbf5
+$secondary-color: #d8dbe3
+$body-background-color: #f1f1f1
+
+body
+  background: $body-background-color
+  //margin-top: 5%
+  margin-left: 5%
+  transition: margin-left .5s
+
+.btn
+  white-space: normal !important
+  &:hover
+   // background: $hover-color
+
+.filter-btn:hover
+  background: $hover-color
+
+.btn-dark:hover
+  color: $hover-color
+
+.my-title
+  font-family: 'Montserrat Alternates', sans-serif
+  border-bottom-width: 10px !important
+  border-color: $hover-color !important
+
+.bg-secondary
+  background: $secondary-color !important
+
+.my-btn
+  text-decoration: none !important
+

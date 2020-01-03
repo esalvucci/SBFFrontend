@@ -1,0 +1,22 @@
+<div class="card text-white bg-secondary mb-3 rounded">
+  <div class="card-header" id="headingTwo">
+    <h2 class="mb-0">
+      <button class="btn btn-link collapsed text-dark my-btn" type="button" data-toggle="collapse"
+              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" (click)="toggle()">
+        <i class="icon ion-md-arrow-dropdown"  *ngIf="isOpen"></i>
+        <i class="icon ion-md-arrow-dropright"  *ngIf="!isOpen"></i>
+        Per Set Charts
+      </button>
+    </h2>
+  </div>
+
+  <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div class="card-body">
+      <app-charts-card1></app-charts-card1>
+      <!--<app-set-chart></app-set-chart>-->
+    </div>
+  </div>
+</div>
+
+
+
