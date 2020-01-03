@@ -7,12 +7,12 @@ import {FilterService} from './filter.service';
 })
 export class HttpServiceService {
 
-  ip = '127.0.0.1';
+  ip = 'https://sbfbackend.herokuapp.com/';
   port = '3000';
   base = '';
 
   constructor(private http: HttpClient, private filter: FilterService) {
-    this.base = 'http://' + this.ip + ':' + this.port;
+    this.base = this.ip; // + ':' + this.port;
   }
 
   calculateFilter() {
