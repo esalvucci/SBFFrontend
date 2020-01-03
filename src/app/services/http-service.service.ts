@@ -7,7 +7,7 @@ import {FilterService} from './filter.service';
 })
 export class HttpServiceService {
 
-  ip = 'https://sbfbackend.herokuapp.com/';
+  ip = 'https://sbfbackend.herokuapp.com';
   port = '3000';
   base = '';
 
