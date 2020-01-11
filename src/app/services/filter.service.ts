@@ -4,12 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FilterService {
-  s = 0;
-  n = 4000;
-  p = 1e-7;
-  m = 0;
-  k = 0;
+  s = 0;  //
+  n = 0;  // data number
+  p = 0;  // false positive probability
+  m = 0;  // cells
+  k = 0;  // hash number
   hash = '4';
+  safeness = 0;
   salt;
   dataSet;
   nonElemDataSet;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CsvManagerService} from "../../../../services/csv-manager.service";
 import {Chart} from "chart.js"
+import {DataResultsService} from '../../../../services/data-results.service';
 
 @Component({
   selector: 'app-emersion-chart',
@@ -9,44 +9,18 @@ import {Chart} from "chart.js"
 })
 export class EmersionChartComponent implements OnInit {
 
-  sets = [];
-  emersion = [];
-  expected_emersion = [];
-
-  header_length = 13;
   chart = [];
 
-  constructor(public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService) { }
 
   ngOnInit() {
-    this.csvManager.getStats().subscribe(
-      data => {
-        this.getData(this.sets, 0, data);
-        this.getData(this.emersion, 6, data);
-        this.getData(this.expected_emersion, 5, data);
-
-        this.chart = this.getElemPerSetChart('emersion');
-      }
-    )
-  }
-
-  getData(list, index, data) {
-    let csvRecordsArray = (<string>data).split(/\r\n|\n/);
-    // console.log(csvRecordsArray.length);
-    for (let i = 14; i < csvRecordsArray.length; i++) {
-
-      //let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      if (currentRecord.length == this.header_length) {
-        list.push(currentRecord[index].trim());
-      }
-    }
+    this.chart = this.getElemPerSetChart('emersion');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.sets;
-    const dataset1 = this.emersion;
-    const dataset2 = this.expected_emersion;
+    const setsLabels = this.data.area;
+    const dataset1 = this.data.emersion;
+    const dataset2 = this.data.expectedEmersion;
 
     return new Chart(ctx, {
       // The type of chart we want to create

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CsvManagerService} from "../../../../services/csv-manager.service";
 import {Chart} from "chart.js"
+import {DataResultsService} from '../../../../services/data-results.service';
 
 @Component({
   selector: 'app-interset-err-chart',
@@ -8,57 +9,20 @@ import {Chart} from "chart.js"
   styleUrls: ['./interset-err-chart.component.sass']
 })
 export class IntersetErrChartComponent implements OnInit {
-  sets = [];
-  a_priori_isep = [];
-  isep = [];
-  isepr = [];
 
-  header_length = 13;
   chart = [];
 
-  constructor(public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService, public csvManager: CsvManagerService) { }
 
   ngOnInit() {
-    this.csvManager.getStats().subscribe(
-      data => {
-        this.getData(this.sets, 0, data);
-        this.getData(this.a_priori_isep, 9, data);
-        this.getData(this.isep, 11, data);
-        this.chart = this.getElemPerSetChart('intersetErrors');
-      }
-    );
-
-    this.csvManager.getISEPR().subscribe(
-      data => {
-        let csvRecordsArray = (<string>data).split(/\r\n|\n/);
-        for (let i = 1; i < csvRecordsArray.length; i++) {
-          let currentRecord = (<string>csvRecordsArray[i]).split(';');
-          if(currentRecord.length == 3){
-            this.isepr.push(currentRecord[2].trim());
-          }
-        }
-      }
-    );
-  }
-
-  getData(list, index, data) {
-    let csvRecordsArray = (<string>data).split(/\r\n|\n/);
-    // console.log(csvRecordsArray.length);
-    for (let i = 14; i < csvRecordsArray.length; i++) {
-
-      //let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      if (currentRecord.length == this.header_length) {
-        list.push(currentRecord[index].trim());
-      }
-    }
+    this.chart = this.getElemPerSetChart('intersetErrors');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.sets;
-    const dataset1 = this.a_priori_isep;
-    const dataset2 = this.isep;
-    const dataset3 = this.isepr;
+    const setsLabels = this.data.area;
+    const dataset1 = this.data.aPrioriIsep;
+    const dataset2 = this.data.isep;
+    const dataset3 = this.data.isepr;
 
     return new Chart(ctx, {
       // The type of chart we want to create

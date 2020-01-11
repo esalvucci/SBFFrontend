@@ -20,7 +20,7 @@ export class PVsMComponent implements OnInit {
 
   ngOnInit() {
    this.chart = this.getChart('p-vs-m', this.m2, this.p2, 'p vs m', 'm', 'p');
-   this.click();
+  // this.click();
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CsvManagerService} from "../../../../services/csv-manager.service";
 import {Chart} from 'chart.js';
+import {DataResultsService} from '../../../../services/data-results.service';
 
 @Component({
   selector: 'app-cells-chart',
@@ -9,44 +9,18 @@ import {Chart} from 'chart.js';
 })
 export class CellsChartComponent implements OnInit {
 
-  sets = [];
-  cells = [];
-  expected_cells = [];
-  header_length = 13;
-
   chart = [];
 
-  constructor(public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService) { }
 
   ngOnInit() {
-    this.csvManager.getStats().subscribe(
-      data => {
-        this.getData(this.sets, 0, data);
-        this.getData(this.expected_cells, 2, data);
-        this.getData(this.cells, 4, data);
-
-        this.chart = this.getElemPerSetChart('cells');
-      }
-    )
-  }
-
-  getData(list, index, data) {
-    let csvRecordsArray = (<string>data).split(/\r\n|\n/);
-    // console.log(csvRecordsArray.length);
-    for (let i = 14; i < csvRecordsArray.length; i++) {
-
-      //let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      if (currentRecord.length == this.header_length) {
-        list.push(currentRecord[index].trim());
-      }
-    }
+    this.chart = this.getElemPerSetChart('cells');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.sets;
-    const dataset_cells = this.cells;
-    const dataset_exp_cells = this.expected_cells;
+    const setsLabels = this.data.area;
+    const dataset_cells = this.data.cells;
+    const dataset_exp_cells = this.data.expectedCells;
 
     return new Chart(ctx, {
       // The type of chart we want to create

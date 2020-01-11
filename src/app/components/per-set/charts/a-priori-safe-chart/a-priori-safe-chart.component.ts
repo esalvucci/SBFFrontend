@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CsvManagerService} from "../../../../services/csv-manager.service";
 import {Chart} from "chart.js";
+import {DataResultsService} from '../../../../services/data-results.service';
 
 @Component({
   selector: 'app-a-priori-safe-chart',
@@ -8,41 +9,18 @@ import {Chart} from "chart.js";
   styleUrls: ['./a-priori-safe-chart.component.sass']
 })
 export class APrioriSafeChartComponent implements OnInit {
-  sets = [];
-  safep = [];
 
-  headerLength = 13;
   chart: Chart = [];
 
-  constructor(public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService) { }
 
   ngOnInit() {
-    this.csvManager.getStats().subscribe(
-      data => {
-        this.getData(this.sets, 0, data);
-        this.getData(this.safep, 12, data);
-        this.chart = this.getElemPerSetChart('aPrioriSafe');
-      }
-    );
-  }
-
-
-  getData(list, index, data) {
-    const csvRecordsArray = (<string> data).split(/\r\n|\n/);
-    // console.log(csvRecordsArray.length);
-    for (let i = 14; i < csvRecordsArray.length; i++) {
-
-      // let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      const currentRecord = (<string> csvRecordsArray[i]).split(';');
-      if (currentRecord.length === this.headerLength) {
-        list.push(currentRecord[index].trim());
-      }
-    }
+    this.chart = this.getElemPerSetChart('aPrioriSafe');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.sets;
-    const dataset1 = this.safep;
+    const setsLabels =  this.data.area;
+    const dataset1 = this.data.aPrioriSafep;
 
     return new Chart(ctx, {
       // The type of chart we want to create
@@ -75,7 +53,7 @@ export class APrioriSafeChartComponent implements OnInit {
         },
         title: {
           display: true,
-          text: 'Inter-set errors'
+          text: 'A priori safeness'
         },
         scales: {
           xAxes: [{
@@ -97,7 +75,7 @@ export class APrioriSafeChartComponent implements OnInit {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'ISEP'
+              labelString: 'SAFEP'
             },
             ticks: {
               min : 0.90,

@@ -21,7 +21,7 @@ export class PVsKComponent implements OnInit {
 
   ngOnInit() {
     this.chart2 = this.getChart('p-vs-k', this.k3, this.p3, 'p vs k', 'k', 'p');
-    this.click();
+   // this.click();
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {
