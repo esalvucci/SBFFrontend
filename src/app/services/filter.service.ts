@@ -39,46 +39,6 @@ export class FilterService {
     );
   }
 
-  setDataSet(file: File) {
-    this.dataSet = file;
-    console.log(file);
-    console.log('DataSet: ' + file.name);
-  }
-
-  setNonElemDataSet(file: File) {
-    this.nonElemDataSet = file;
-    console.log(file);
-    console.log('NonElement dataset: ' + file.name);
-  }
-
-  setHashSalt(file: File) {
-    this.salt = file;
-    console.log(file);
-    console.log('Salt: ' + file.name);
-  }
-
-  setHashFunc(hash: string) {
-    this.hash = hash;
-    console.log(hash);
-    console.log('Has function: ' + this.hash);
-  }
-
-  resetFields() {
-    this.s = 0;
-    this.n = 0;
-    this.p = 0;
-    this.m = 0;
-    this.k = 0;
-  }
-
-  calculateFilter() {
-    // if (this.s <= 0) { ... }
-    if (this.n <= 0) { this.n = this.calculateN(); }
-    if (this.p <= 0) { this.p = this.calculateP(); }
-    if (this.m <= 0) { this.m = this.calculateM(); }
-    if (this.k <= 0) { this.k = this.calculateK(); }
-  }
-
   calculateN() {
     // ceil(m / (-k / log(1 - exp(log(p) / k))))
     const logP = Math.log(this.p);
@@ -94,13 +54,6 @@ export class FilterService {
     const exp = Math.exp( (- this.k) / ( this.m / this.n));
     const base = 1 - exp;
     return Math.pow( base, this.k);
-  }
-
-  calculatePWithParams(k, m, n) {
-    // pow(1 - exp(-k / (m / n)), k)
-    const exp = Math.exp( (- k) / ( m / n));
-    const base = 1 - exp;
-    return Math.pow( base, k);
   }
 
   calculateM() {
