@@ -22,7 +22,28 @@ export class DataResultsService {
   isepr = [];
 
   constructor(public csvManager: CsvManagerService) {
+    // this.loadData();
+  }
 
+  cleanData() {
+    this.area = [];
+    this.members = [];
+    this.expectedCells = [];
+    this.selfCollision = [];
+    this.cells = [];
+    this.expectedEmersion = [];
+    this.emersion = [];
+    this.aPrioriFpp = [];
+    this.fpp = [];
+    this.aPrioriIsep = [];
+    this.expectedIsep = [];
+    this.isep = [];
+    this.aPrioriSafep = [];
+    this.isepr = [];
+  }
+
+  loadData() {
+   // this.cleanData();
     this.csvManager.getStats().subscribe(
         data => {
           this.getData(data);
@@ -34,7 +55,7 @@ export class DataResultsService {
           const csvRecordsArray = (data as string).split(/\r\n|\n/);
           for (let i = 1; i < csvRecordsArray.length; i++) {
             const currentRecord = (csvRecordsArray[i] as string).split(';');
-            if(currentRecord.length === 3) {
+            if( currentRecord.length === 3) {
               this.isepr.push(currentRecord[2].trim());
             }
           }

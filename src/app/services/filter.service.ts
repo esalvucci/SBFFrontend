@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import {CsvManagerService} from './csv-manager.service';
+import {sync} from 'ionicons/icons';
+import {WholeFilterComponent} from '../components/whole-filter/whole-filter.component';
+import {WholeFilterService} from './whole-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +20,24 @@ export class FilterService {
   nonElemDataSet;
   // ordering = 'unif';
 
-  constructor() { }
+  constructor(public csvManager: CsvManagerService, public wholeFilter: WholeFilterService) { this.loadData(); }
+
+  loadData() {
+    this.csvManager.getStats().subscribe(
+        data => {
+          const csvRecordsArray = (data as string).split(/\r\n|\n/);
+
+          this.hash = (csvRecordsArray[0] as string).split(';')[1].trim();
+          this.k = (csvRecordsArray[1] as string).split(';')[1].trim() as unknown as number;  // hash number
+          this.m = (csvRecordsArray[4] as string).split(';')[1].trim() as unknown as number;  // cells number
+          this.n = (csvRecordsArray[7] as string).split(';')[1].trim() as unknown as number;  // data number
+          this.p = (csvRecordsArray[11] as string).split(';')[1].trim() as unknown as number;  // false positive probability
+          this.safeness = (csvRecordsArray[12] as string).split(';')[1].trim() as unknown as number;  // false positive probability
+
+          this.wholeFilter.setParams(this.k, this.m, this.n, this.p);
+        }
+    );
+  }
 
   setDataSet(file: File) {
     this.dataSet = file;
@@ -73,6 +94,13 @@ export class FilterService {
     const exp = Math.exp( (- this.k) / ( this.m / this.n));
     const base = 1 - exp;
     return Math.pow( base, this.k);
+  }
+
+  calculatePWithParams(k, m, n) {
+    // pow(1 - exp(-k / (m / n)), k)
+    const exp = Math.exp( (- k) / ( m / n));
+    const base = 1 - exp;
+    return Math.pow( base, k);
   }
 
   calculateM() {

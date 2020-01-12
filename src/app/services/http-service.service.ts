@@ -11,7 +11,7 @@ export class HttpServiceService {
   port = '3000';
   base = '';
 
-  constructor(private http: HttpClient, private filter: FilterService) {
+  constructor(private http: HttpClient) {
     this.base = this.ip; // + ':' + this.port;
   }
 
@@ -24,7 +24,7 @@ export class HttpServiceService {
       error => console.log(error)
     );
   }
-
+ /*
   postData() {
     const url = this.base + '/loadDataset';
     this.http.post(url, this.filter.dataSet).subscribe(
@@ -39,4 +39,5 @@ export class HttpServiceService {
       }
     );
   }
+ */
 }
