@@ -45,7 +45,7 @@ export class WholeFilterService {
     const step = this.n * (0.53);
     let index = 0;
     while ( index <= 20) {
-      let newN = myN;
+      const newN = myN;
       this.n1.push(this.getStrNum(myN));
       this.p1.push(this.calculateP(this.k, this.m, newN));
       myN += step;
