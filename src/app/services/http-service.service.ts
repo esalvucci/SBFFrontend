@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {FilterService} from './filter.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +14,17 @@ export class HttpServiceService {
     this.base = this.ip; // + ':' + this.port;
   }
 
-  calculateFilter() {
+  calculateFilter( p, m, k, hash, salt, dataSet, nonElemDataSet) {
     const url = this.base + '/calculateFilter';
 
     console.log('calculateFilter requet sent to ' + url);
-    this.http.get(url).subscribe(
+    console.log(p, m, k, hash, salt, dataSet, nonElemDataSet);
+    /*this.http.get(url).subscribe(
       res => console.log(res),
       error => console.log(error)
-    );
+    );*/
   }
+
  /*
   postData() {
     const url = this.base + '/loadDataset';

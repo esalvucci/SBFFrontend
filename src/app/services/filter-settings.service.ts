@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {HttpServiceService} from './http-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FilterSettingsService {
   dataSet;
   nonElemDataSet;
   // ordering = 'unif';
-  constructor() { }
+  constructor(public http: HttpServiceService) { }
 
   setDataSet(file: File) {
     this.dataSet = file;
@@ -39,7 +40,15 @@ export class FilterSettingsService {
   }
 
   calculate() {
-    console.log('filterSettings calculating...');
+    this.http.calculateFilter(
+      this.p,
+      this.m,
+      this.k,
+      this.hash,
+      this.salt,
+      this.dataSet,
+      this.nonElemDataSet
+    );
   }
 
 }
