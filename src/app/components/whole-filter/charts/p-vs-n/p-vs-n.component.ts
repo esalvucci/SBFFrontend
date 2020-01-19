@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FilterService} from '../../../../services/filter.service';
 import { Chart } from 'chart.js';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
+import {WholeFilterService} from '../../../../services/whole-filter.service';
 
 @Component({
   selector: 'app-p-vs-n',
@@ -11,17 +12,13 @@ import {CsvManagerService} from '../../../../services/csv-manager.service';
 export class PVsNComponent implements OnInit {
 
   chart: Chart = [];
-  p1 = [];
-  n1 = [];
-
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public filter: FilterService, public csvManager: CsvManagerService) {}
+  constructor(public wholeFilter: WholeFilterService) {}
 
   ngOnInit() {
-    this.chart = this.getChart('p-vs-n', this.n1, this.p1, 'p vs n', 'n', 'p');
-    //this.click();
+    this.chart = this.getChart('p-vs-n', this.wholeFilter.n1, this.wholeFilter.p1, 'p vs n', 'n', 'p');
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {
@@ -70,36 +67,5 @@ export class PVsNComponent implements OnInit {
         }
       }
     });
-  }
-
-  click() {
-    this.filter.resetFields();
-    this.filter.n = 4000;
-    this.filter.p = 1e-7;
-    this.filter.calculateFilter();
-    this.calculate1();
-  }
-
-  calculate1() {
-    this.p1.length = 0;
-    this.n1.length = 0;
-
-    let myN = this.filter.n * (0.77);
-    const step = this.filter.n * (0.53);
-    let index = 0;
-    while ( index <= 20) {
-      this.filter.n = myN;
-      this.n1.push(this.getStrNum(myN));
-      this.p1.push(this.filter.calculateP());
-      myN += step;
-      index++;
-    }
-    this.chart.update();
-  }
-
-  getStrNum(x: number) {
-    const xStr = x.toExponential(2);
-    const xArr = xStr.split('e');
-    return xArr[0];
   }
 }

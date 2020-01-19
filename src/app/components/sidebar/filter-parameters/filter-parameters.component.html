@@ -42,27 +42,26 @@
     <div class="form-group">
       <label for="inputP" class=" text-white"><b>p</b> &nbsp; Probability of False positive</label>
       <input [(ngModel)]="filter.p" #ctrl="ngModel" id="inputP" type="number" min=0 class="form-control"
-             aria-label="False positive rate" aria-describedby="inputGroup-sizing-default" >
+             aria-label="False positive rate" aria-describedby="inputGroup-sizing-default"  [disabled]="this.filter.m > 0 || this.filter.k > 0" >
     </div>
 
     <div class="form-group">
       <label for="inputM" class=" text-white"><b>m</b> &nbsp; Number of bits in the filter</label>
       <input [(ngModel)]="filter.m" #ctrl="ngModel" id="inputM" type="number" min=0 class="form-control"
-             aria-label="number of filter's bits" aria-describedby="inputGroup-sizing-default">
+             aria-label="number of filter's bits" aria-describedby="inputGroup-sizing-default" [disabled]="this.filter.p > 0">
     </div>
 
     <div class="form-group">
       <label for="inputK" class=" text-white"><b>k</b> &nbsp; Number of hash functions</label>
       <input [(ngModel)]="filter.k" #ctrl="ngModel" id="inputK" type="number" min=0 class="form-control"
-             aria-label="number of hash functions" aria-describedby="inputGroup-sizing-default">
+             aria-label="number of hash functions" aria-describedby="inputGroup-sizing-default" [disabled]="this.filter.p > 0">
     </div>
 
   </div>
 
   <div class="row justify-content-center">
     <div class="col-6 ">
-      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn"
-              [disabled]="!canCalculate()" (click)="calculate()">
+      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn" (click)="calculate()">
         Calculate filter
       </button>
     </div>

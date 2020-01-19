@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FilterService} from '../../services/filter.service';
-import {CsvManagerService} from '../../services/csv-manager.service';
 
 @Component({
   selector: 'app-final-filter',
@@ -12,6 +11,4 @@ export class FinalFilterComponent implements OnInit {
   constructor(public filter: FilterService) { }
 
   ngOnInit() {}
-
-
 }

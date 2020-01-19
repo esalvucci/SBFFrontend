@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FilterService} from '../../../services/filter.service';
-import {HttpServiceService} from '../../../services/http-service.service';
-import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {FilterSettingsService} from '../../../services/filter-settings.service';
 
 @Component({
   selector: 'app-filter-parameters',
@@ -15,24 +13,12 @@ export class FilterParametersComponent implements OnInit {
   nonELemName = 'Choose file';
   dataSetName = 'Choose file';
 
-  constructor(public filter: FilterService, public http: HttpServiceService) {}
+  constructor(public filter: FilterSettingsService) {}
 
   ngOnInit() {}
 
-  canCalculate() {
-    // let fieldSet = 0;
-    // if (this.filter.s > 0) {fieldSet += 1; }
-    // if (this.filter.n > 0) {fieldSet += 1; }
-    // if (this.filter.p > 0) {fieldSet += 1; }
-    // if (this.filter.m > 0) {fieldSet += 1; }
-    // if (this.filter.k > 0) {fieldSet += 1; }
-    // return fieldSet > 1 && fieldSet < 4;
-
-    return  true;
-  }
-
   calculate() {
-    this.http.calculateFilter();
+    this.filter.calculate();
   }
 
   selectHashFunction(event) {
