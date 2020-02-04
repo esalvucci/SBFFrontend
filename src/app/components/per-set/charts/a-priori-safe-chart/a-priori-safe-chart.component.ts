@@ -56,21 +56,6 @@ export class APrioriSafeChartComponent implements OnInit {
           text: 'A priori safeness'
         },
         scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Set'
-            },
-            /*ticks: {
-              callback: function(value, index, values) {
-                return parseInt(value);
-              },
-              autoSkip: false,
-              min: 0,
-              stepSize: 50
-            }*/
-          }],
           yAxes: [{
             display: true,
             scaleLabel: {
@@ -80,6 +65,21 @@ export class APrioriSafeChartComponent implements OnInit {
             ticks: {
               min : 0.90,
               stepSize: 0.02
+            }
+          }],
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Set'
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
             }
           }]
         }

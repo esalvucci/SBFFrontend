@@ -31,10 +31,10 @@ export class FalsePosProbChartComponent implements OnInit {
 
     this.csvManager.getFPR().subscribe(
       data => {
-        let csvRecordsArray = (<string>data).split(/\r\n|\n/);
-        for(let i = 1; i<csvRecordsArray.length; i++) {
-          let currentRecord = (<string> csvRecordsArray[i]).split(';');
-          if(currentRecord.length == 3) {
+        const csvRecordsArray = (<string> data).split(/\r\n|\n/);
+        for (let i = 1; i < csvRecordsArray.length; i++) {
+          const currentRecord = (<string> csvRecordsArray[i]).split(';');
+          if (currentRecord.length === 3) {
             this.fpr.push(currentRecord[2].trim());
           }
         }
@@ -43,13 +43,12 @@ export class FalsePosProbChartComponent implements OnInit {
   }
 
   getData(list, index, data) {
-    let csvRecordsArray = (<string>data).split(/\r\n|\n/);
+    const csvRecordsArray = (<string> data).split(/\r\n|\n/);
     // console.log(csvRecordsArray.length);
     for (let i = 14; i < csvRecordsArray.length; i++) {
-
-      //let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      let currentRecord = (<string>csvRecordsArray[i]).split(';');
-      if (currentRecord.length == this.header_length) {
+      // let currentRecord = (<string>csvRecordsArray[i]).split(';');
+      const currentRecord = (<string> csvRecordsArray[i]).split(';');
+      if (currentRecord.length === this.header_length) {
         list.push(currentRecord[index].trim());
       }
     }
@@ -117,6 +116,14 @@ export class FalsePosProbChartComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: 'Set'
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
             }
           }],
           yAxes: [{
@@ -126,8 +133,8 @@ export class FalsePosProbChartComponent implements OnInit {
               labelString: 'FPP'
             },
             ticks: {
-              min : 0.000000,
-              stepSize: 0.000002
+              min : 0,
+              stepSize: 0.000005
             }
           }]
         }

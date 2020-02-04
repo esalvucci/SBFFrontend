@@ -56,7 +56,15 @@ export class ElementsChartComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: 'Set'
-            }
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
+              }
           }],
           yAxes: [{
             display: true,
@@ -65,7 +73,7 @@ export class ElementsChartComponent implements OnInit {
               labelString: 'Members'
             },
             ticks: {
-              min : 0,
+              min: 0,
               stepSize: 50
             }
           }]

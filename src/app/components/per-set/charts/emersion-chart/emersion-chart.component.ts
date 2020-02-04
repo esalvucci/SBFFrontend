@@ -70,6 +70,14 @@ export class EmersionChartComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: 'Set'
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
             }
           }],
           yAxes: [{

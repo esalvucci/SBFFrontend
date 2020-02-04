@@ -52,7 +52,7 @@ export class IntersetErrChartComponent implements OnInit {
           },
           {
             type: 'line',
-            label: 'ISEPR',
+            label: 'ISER',
             borderColor: 'rgb(0, 100, 0)',
             borderWidth: 1,
             fill: false,
@@ -80,6 +80,14 @@ export class IntersetErrChartComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: 'Set'
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
             }
           }],
           yAxes: [{

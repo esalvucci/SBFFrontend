@@ -67,6 +67,14 @@ export class CellsChartComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: 'Set'
+            },
+            ticks: {
+              callback: (value, index, values)  => {
+                if (value % 50 === 0) {
+                  return value;
+                }
+              },
+              autoSkip: false
             }
           }],
           yAxes: [{
@@ -76,7 +84,7 @@ export class CellsChartComponent implements OnInit {
               labelString: 'Cells'
             },
             ticks: {
-              min : 0,
+              min: 0,
               stepSize: 500
             }
           }]
