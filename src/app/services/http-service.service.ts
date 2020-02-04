@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpServiceService {
 
   //ip = 'https://sbfbackend.herokuapp.com';
@@ -15,21 +18,22 @@ export class HttpServiceService {
     this.base = this.ip; // + ':' + this.port;
   }
 
-  calculateFilter( p, m, k, hash, salt, dataSet, nonElemDataSet) {
-    const url = this.base + '/calculateFilter';
-
-    console.log('calculateFilter requet sent to ' + url);
-    console.log(p, m, k, hash, salt, dataSet, nonElemDataSet);
-    /*this.http.get(url).subscribe(
+  calculateFilter( dataSet, nonElemDataSet, hash, salt, p, m, k) {
+    console.log('post Data');
+    console.log(dataSet)
+    this.postData(dataSet);
+    /*const url = this.base + '/calculateFilter';
+    console.log('calculateFilter request sent to ' + url);
+    //console.log(p, m, k, hash, salt, dataSet, nonElemDataSet);
+    this.http.get(url).subscribe(
       res => console.log(res),
       error => console.log(error)
     );*/
   }
 
- /*
-  postData() {
-    const url = this.base + '/loadDataset';
-    this.http.post(url, this.filter.dataSet).subscribe(
+  postData1(dataSet) {
+    const url = this.base + '/post';
+    this.http.post(url, dataSet).subscribe(
       res => {
         console.log(res);
       },
@@ -41,5 +45,17 @@ export class HttpServiceService {
       }
     );
   }
- */
+
+  postData(dataSet) {
+    const url = this.base + '/users';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    return this.http.post(url, dataSet, httpOptions).subscribe(res => {
+      console.log(res);
+    });
+  }
 }

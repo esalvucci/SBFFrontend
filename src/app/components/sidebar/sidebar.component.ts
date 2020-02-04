@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FilterService} from '../../services/filter.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,6 +31,6 @@ export class SidebarComponent implements OnInit {
 
   closeNav() {
     document.getElementById('mySidenav').style.width = '5%';
-    document.getElementById('main').style.marginLeft= '5%';
+    document.getElementById('main').style.marginLeft = '5%';
   }
 }

@@ -40,14 +40,15 @@ export class FilterSettingsService {
   }
 
   calculate() {
+
     this.http.calculateFilter(
-      this.p,
-      this.m,
-      this.k,
+      this.dataSet,
+      this.nonElemDataSet,
       this.hash,
       this.salt,
-      this.dataSet,
-      this.nonElemDataSet
+      this.p,
+      this.m,
+      this.k
     );
   }
 
