@@ -15,7 +15,7 @@ export class PVsNComponent implements OnInit {
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public wholeFilter: WholeFilterService) {}
+  constructor(public wholeFilter: WholeFilterService,  public csvManager: CsvManagerService) {}
 
   ngOnInit() {
     this.chart = this.getChart('p-vs-n', this.wholeFilter.n1, this.wholeFilter.p1, 'p vs n', 'n', 'p');
@@ -40,6 +40,9 @@ export class PVsNComponent implements OnInit {
 
       // Configuration options go here
       options: {
+        legend: {
+          display: false
+        },
         title: {
           display: true,
           text: title

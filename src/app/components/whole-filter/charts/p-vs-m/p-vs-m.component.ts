@@ -14,7 +14,7 @@ export class PVsMComponent implements OnInit {
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public whileFilter: WholeFilterService) {}
+  constructor(public whileFilter: WholeFilterService,  public csvManager: CsvManagerService) {}
 
   ngOnInit() {
    this.chart = this.getChart('p-vs-m', this.whileFilter.m2, this.whileFilter.p2, 'p vs m', 'm', 'p');
@@ -39,6 +39,9 @@ export class PVsMComponent implements OnInit {
 
       // Configuration options go here
       options: {
+        legend: {
+          display: false
+        },
         title: {
           display: true,
           text: title

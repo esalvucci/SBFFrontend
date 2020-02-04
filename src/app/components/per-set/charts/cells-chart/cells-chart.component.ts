@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'chart.js';
 import {DataResultsService} from '../../../../services/data-results.service';
+import {CsvManagerService} from '../../../../services/csv-manager.service';
 
 @Component({
   selector: 'app-cells-chart',
@@ -11,7 +12,7 @@ export class CellsChartComponent implements OnInit {
 
   chart = [];
 
-  constructor(public data: DataResultsService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
 
   ngOnInit() {
     this.chart = this.getElemPerSetChart('cells');

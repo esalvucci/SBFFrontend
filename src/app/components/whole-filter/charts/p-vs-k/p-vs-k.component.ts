@@ -16,7 +16,7 @@ export class PVsKComponent implements OnInit {
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public wholeFilter: WholeFilterService) {}
+  constructor(public wholeFilter: WholeFilterService, public csvManager: CsvManagerService) {}
 
   ngOnInit() {
     this.chart2 = this.getChart('p-vs-k', this.wholeFilter.k3, this.wholeFilter.p3, 'p vs k', 'k', 'p');
@@ -41,6 +41,10 @@ export class PVsKComponent implements OnInit {
 
       // Configuration options go here
       options: {
+        legend: {
+          display: false
+        },
+
         title: {
           display: true,
           text: title

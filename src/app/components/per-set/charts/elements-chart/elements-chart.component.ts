@@ -15,7 +15,7 @@ export class ElementsChartComponent implements OnInit {
 
   chart = [];
 
-  constructor(public data: DataResultsService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
 
   ngOnInit() {
     this.chart = this.getElemPerSetChart('elemsPerSet');

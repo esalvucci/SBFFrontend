@@ -12,7 +12,7 @@ export class APrioriSafeChartComponent implements OnInit {
 
   chart: Chart = [];
 
-  constructor(public data: DataResultsService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
 
   ngOnInit() {
     this.chart = this.getElemPerSetChart('aPrioriSafe');
