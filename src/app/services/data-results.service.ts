@@ -38,6 +38,7 @@ export class DataResultsService {
     this.emersion = [];
     this.aPrioriFpp = [];
     this.fpp = [];
+    this.fpr = [];
     this.aPrioriIsep = [];
     this.expectedIsep = [];
     this.isep = [];
@@ -63,9 +64,9 @@ export class DataResultsService {
             }
 
             if (x > 0) {
-
+              console.log(this.fpr);
               this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members, this.emersion, this.expectedEmersion,
-                  this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp);
+                  this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp, this.fpr);
             }
           }
       );

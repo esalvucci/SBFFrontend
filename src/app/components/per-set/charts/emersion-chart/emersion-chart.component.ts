@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Chart} from 'chart.js'
+import {Chart} from 'chart.js';
 import {DataResultsService} from '../../../../services/data-results.service';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {ChartsService} from '../../../../services/charts.service';
@@ -18,9 +18,6 @@ export class EmersionChartComponent implements OnInit {
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.data.area;
-    const dataset1 = this.data.emersion;
-    const dataset2 = this.data.expectedEmersion;
 
     return new Chart(ctx, {
       // The type of chart we want to create
@@ -28,7 +25,7 @@ export class EmersionChartComponent implements OnInit {
 
       // The data for our dataset
       data: {
-        labels: setsLabels,
+        labels:  this.data.area,
         datasets: [
           {
             type: 'line',
@@ -36,7 +33,7 @@ export class EmersionChartComponent implements OnInit {
             borderColor: 'rgb(255, 0, 0)',
             borderWidth: 1,
             fill: false,
-            data: dataset2,
+            data:  this.data.expectedEmersion,
             pointRadius: 0,
             pointStyle: 'line'
           }, {
@@ -44,7 +41,7 @@ export class EmersionChartComponent implements OnInit {
           borderColor: 'rgb(14, 121, 163)',
           borderWidth: 1,
           fill: false,
-          data: dataset1,
+          data: this.data.emersion,
           pointRadius: 0,
           pointStyle: 'line'
         }]
