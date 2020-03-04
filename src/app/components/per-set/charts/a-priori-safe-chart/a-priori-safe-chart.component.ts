@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CsvManagerService} from "../../../../services/csv-manager.service";
-import {Chart} from "chart.js";
+import {CsvManagerService} from '../../../../services/csv-manager.service';
+import {Chart} from 'chart.js';
 import {DataResultsService} from '../../../../services/data-results.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-a-priori-safe-chart',
@@ -11,8 +12,7 @@ import {DataResultsService} from '../../../../services/data-results.service';
 export class APrioriSafeChartComponent implements OnInit {
 
   chart: Chart = [];
-
-  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService, public  chart1: ChartsService) { }
 
   ngOnInit() {
     this.chart = this.getElemPerSetChart('aPrioriSafe');

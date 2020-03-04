@@ -1,5 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {CsvManagerService} from './csv-manager.service';
+import {ChartsService} from './charts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class DataResultsService {
   aPrioriSafep = [];
   isepr = [];
 
-  constructor(public csvManager: CsvManagerService) {
+  constructor(public csvManager: CsvManagerService, public chart: ChartsService) {
     // this.loadData();
   }
 
@@ -43,24 +44,30 @@ export class DataResultsService {
   }
 
   loadData() {
-   // this.cleanData();
-    this.csvManager.getStats().subscribe(
-        data => {
-          this.getData(data);
-        }
-    );
+    this.cleanData();
 
+    this.csvManager.getStats().subscribe(data => this.getData(data));
     this.csvManager.getISEPR().subscribe(
-        data => {
-          const csvRecordsArray = (data as string).split(/\r\n|\n/);
-          for (let i = 1; i < csvRecordsArray.length; i++) {
-            const currentRecord = (csvRecordsArray[i] as string).split(';');
-            if( currentRecord.length === 3) {
-              this.isepr.push(currentRecord[2].trim());
+          data => {
+            const csvRecordsArray = (data as string).split(/\r\n|\n/);
+            for (let i = 1; i < csvRecordsArray.length; i++) {
+              const currentRecord = (csvRecordsArray[i] as string).split(';');
+              if (currentRecord.length === 3) {
+                this.isepr.push(currentRecord[2].trim());
+              }
             }
+
+
+           // console.log(this.area);
+           // console.log(this.cells[0]);
+           // console.log(this.expectedCells);
+           /* this.chart.chartCell.data.labels.push( this.area);
+            this.chart.chartCell.data.datasets[0].data = this.cells;
+            this.chart.chartCell.data.datasets [1].data = this.expectedCells;
+            this.chart.chartCell.update();*/
+            this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members);
           }
-        }
-    );
+      );
   }
 
   getData(data) {

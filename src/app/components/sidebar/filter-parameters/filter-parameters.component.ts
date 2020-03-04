@@ -48,5 +48,9 @@ export class FilterParametersComponent implements OnInit {
     this.nonELemName = (str.substring(str.lastIndexOf('\\') + 1));
     this.filter.setNonElemDataSet(e.target.files[0]);
   }
+
+  disableButton() {
+    return !this.filter.dataSet || !this.filter.nonElemDataSet;
+  }
 }
 

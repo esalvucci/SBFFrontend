@@ -61,7 +61,7 @@
 
   <div class="row justify-content-center">
     <div class="col-6 ">
-      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn" (click)="calculate()">
+      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn" (click)="calculate()" [disabled]="disableButton()">
         Calculate filter
       </button>
     </div>

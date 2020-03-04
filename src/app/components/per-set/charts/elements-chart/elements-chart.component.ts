@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
-import {CsvManagerService} from "../../../../services/csv-manager.service";
 import {DataResultsService} from '../../../../services/data-results.service';
+import {ChartsService} from '../../../../services/charts.service';
+import {CsvManagerService} from '../../../../services/csv-manager.service';
 
 @Component({
   selector: 'app-elements-chart',
@@ -9,21 +10,14 @@ import {DataResultsService} from '../../../../services/data-results.service';
   styleUrls: ['./elements-chart.component.sass']
 })
 export class ElementsChartComponent implements OnInit {
-  sets = [];
-  members = [];
-  header_length = 13;
 
-  chart = [];
-
-  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService, public csvManager: CsvManagerService, public chart: ChartsService) { }
 
   ngOnInit() {
-    this.chart = this.getElemPerSetChart('elemsPerSet');
+    this.chart.chartElements = this.getElemPerSetChart('elemsPerSet');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels = this.data.area;
-    const mydata = this.data.members;
 
     return new Chart(ctx, {
       // The type of chart we want to create
@@ -31,12 +25,12 @@ export class ElementsChartComponent implements OnInit {
 
       // The data for our dataset
       data: {
-        labels: setsLabels,
+        labels: this.data.area,
         datasets: [{
-          //label: 'My First dataset',
+          // label: 'My First dataset',
           backgroundColor: 'rgb(54, 187, 245, 0.6)',
           borderColor: 'rgb(14, 121, 163)',
-          data: mydata
+          data: this.data.members
         }]
       },
 

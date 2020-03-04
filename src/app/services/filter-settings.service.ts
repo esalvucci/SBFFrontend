@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpServiceService} from './http-service.service';
+import {DataResultsService} from './data-results.service';
+import {ChartsService} from './charts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class FilterSettingsService {
   dataSet;
   nonElemDataSet;
   // ordering = 'unif';
-  constructor(public http: HttpServiceService) { }
+
+  constructor(public http: HttpServiceService, public data: DataResultsService, public charts: ChartsService) { }
 
   setDataSet(file: File) {
     this.dataSet = file;
@@ -39,17 +42,19 @@ export class FilterSettingsService {
     console.log('Has function: ' + this.hash);
   }
 
-  calculate() {
-
-    this.http.calculateFilter(
-      this.dataSet,
-      this.nonElemDataSet,
-      this.hash,
-      this.salt,
-      this.p,
-      this.m,
-      this.k
+  async calculate() {
+    await this.http.calculateFilter(
+        this.dataSet,
+        this.nonElemDataSet,
+        this.hash,
+        this.salt,
+        this.p,
+        this.m,
+        this.k
     );
+
+    this.data.loadData();
   }
+
 
 }
