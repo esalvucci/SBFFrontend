@@ -1,6 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {CsvManagerService} from './csv-manager.service';
 import {ChartsService} from './charts.service';
+import {FilterService} from './filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class DataResultsService {
   aPrioriSafep = [];
   isepr = [];
 
-  constructor(public csvManager: CsvManagerService, public chart: ChartsService) {
+  constructor(public csvManager: CsvManagerService, public chart: ChartsService, public filter: FilterService) {
      this.loadData(0);
   }
 
@@ -68,6 +69,8 @@ export class DataResultsService {
             }
           }
       );
+
+    this.filter.loadData();
   }
 
   getFPR(data) {
