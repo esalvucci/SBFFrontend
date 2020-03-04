@@ -53,7 +53,7 @@ export class FilterSettingsService {
         this.k
     );
 
-    this.data.loadData();
+    this.data.loadData(1);
   }
 
 

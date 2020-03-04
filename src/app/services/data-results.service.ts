@@ -24,7 +24,7 @@ export class DataResultsService {
   isepr = [];
 
   constructor(public csvManager: CsvManagerService, public chart: ChartsService) {
-     this.loadData();
+     this.loadData(0);
   }
 
   cleanData() {
@@ -44,7 +44,7 @@ export class DataResultsService {
     this.isepr = [];
   }
 
-  loadData() {
+  loadData(x) {
     this.cleanData();
 
     this.csvManager.getStats().subscribe(data => this.getData(data));
@@ -61,8 +61,11 @@ export class DataResultsService {
               }
             }
 
-            this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members,  this.emersion, this.expectedEmersion,
+            if (x > 0) {
+
+              this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members, this.emersion, this.expectedEmersion,
                   this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp);
+            }
           }
       );
   }

@@ -11,21 +11,20 @@ import {ChartsService} from '../../../../services/charts.service';
 })
 export class APrioriSafeChartComponent implements OnInit {
 
-  constructor(public data: DataResultsService,  public csvManager: CsvManagerService, public  chart: ChartsService) { }
+  constructor(public data: DataResultsService, public csvManager: CsvManagerService,  public chart: ChartsService) { }
 
   ngOnInit() {
     this.chart.chartAPriori = this.getElemPerSetChart('aPrioriSafe');
   }
 
   getElemPerSetChart(ctx) {
-
     return new Chart(ctx, {
       // The type of chart we want to create
       type: 'line',
 
       // The data for our dataset
       data: {
-        labels:  this.data.area,
+        labels: this.data.area,
         datasets: [{
           label: 'A priori ISEP',
           borderColor: 'rgb(14, 121, 163)',

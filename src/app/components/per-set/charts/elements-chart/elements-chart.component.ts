@@ -11,7 +11,7 @@ import {CsvManagerService} from '../../../../services/csv-manager.service';
 })
 export class ElementsChartComponent implements OnInit {
 
-  constructor(public data: DataResultsService, public csvManager: CsvManagerService, public chart: ChartsService) { }
+  constructor(public data: DataResultsService, public csvManager: CsvManagerService,  public chart: ChartsService) { }
 
   ngOnInit() {
     this.chart.chartElements = this.getElemPerSetChart('elemsPerSet');
