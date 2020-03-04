@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CsvManagerService} from "../../../../services/csv-manager.service";
-import {Chart} from "chart.js"
+import {CsvManagerService} from '../../../../services/csv-manager.service';
+import {Chart} from 'chart.js';
 import {DataResultsService} from '../../../../services/data-results.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-interset-err-chart',
@@ -10,12 +11,10 @@ import {DataResultsService} from '../../../../services/data-results.service';
 })
 export class IntersetErrChartComponent implements OnInit {
 
-  chart = [];
-
-  constructor(public data: DataResultsService, public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService, public csvManager: CsvManagerService, public chart: ChartsService) { }
 
   ngOnInit() {
-    this.chart = this.getElemPerSetChart('intersetErrors');
+    this.chart.chartInterset = this.getElemPerSetChart('intersetErrors');
   }
 
   getElemPerSetChart(ctx) {

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {DataResultsService} from '../../services/data-results.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-per-set',
@@ -9,9 +8,7 @@ import {DataResultsService} from '../../services/data-results.service';
 export class PerSetComponent {
   isOpen = false;
 
-  constructor(data: DataResultsService) {
-    data.loadData();
-  }
+  constructor() {}
 
   toggle() {
     this.isOpen = ! this.isOpen;

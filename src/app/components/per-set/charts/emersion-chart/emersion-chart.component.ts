@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Chart} from "chart.js"
+import {Chart} from 'chart.js'
 import {DataResultsService} from '../../../../services/data-results.service';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-emersion-chart',
@@ -10,12 +11,10 @@ import {CsvManagerService} from '../../../../services/csv-manager.service';
 })
 export class EmersionChartComponent implements OnInit {
 
-  chart = [];
-
-  constructor(public data: DataResultsService,  public csvManager: CsvManagerService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService, public chart: ChartsService) { }
 
   ngOnInit() {
-    this.chart = this.getElemPerSetChart('emersion');
+    this.chart.chartEmersion = this.getElemPerSetChart('emersion');
   }
 
   getElemPerSetChart(ctx) {

@@ -11,16 +11,13 @@ import {ChartsService} from '../../../../services/charts.service';
 })
 export class APrioriSafeChartComponent implements OnInit {
 
-  chart: Chart = [];
-  constructor(public data: DataResultsService,  public csvManager: CsvManagerService, public  chart1: ChartsService) { }
+  constructor(public data: DataResultsService,  public csvManager: CsvManagerService, public  chart: ChartsService) { }
 
   ngOnInit() {
-    this.chart = this.getElemPerSetChart('aPrioriSafe');
+    this.chart.chartAPriori = this.getElemPerSetChart('aPrioriSafe');
   }
 
   getElemPerSetChart(ctx) {
-    const setsLabels =  this.data.area;
-    const dataset1 = this.data.aPrioriSafep;
 
     return new Chart(ctx, {
       // The type of chart we want to create
@@ -28,13 +25,13 @@ export class APrioriSafeChartComponent implements OnInit {
 
       // The data for our dataset
       data: {
-        labels: setsLabels,
+        labels:  this.data.area,
         datasets: [{
           label: 'A priori ISEP',
           borderColor: 'rgb(14, 121, 163)',
           borderWidth: 1,
           fill: false,
-          data: dataset1,
+          data: this.data.aPrioriSafep,
           pointRadius: 0,
           pointStyle: 'line'
         }]

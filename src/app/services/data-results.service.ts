@@ -16,6 +16,7 @@ export class DataResultsService {
   emersion = [];
   aPrioriFpp = [];
   fpp = [];
+  fpr = [];
   aPrioriIsep = [];
   expectedIsep = [];
   isep = [];
@@ -23,7 +24,7 @@ export class DataResultsService {
   isepr = [];
 
   constructor(public csvManager: CsvManagerService, public chart: ChartsService) {
-    // this.loadData();
+     this.loadData();
   }
 
   cleanData() {
@@ -47,6 +48,9 @@ export class DataResultsService {
     this.cleanData();
 
     this.csvManager.getStats().subscribe(data => this.getData(data));
+
+    this.csvManager.getFPR().subscribe( data => this.getFPR(data));
+
     this.csvManager.getISEPR().subscribe(
           data => {
             const csvRecordsArray = (data as string).split(/\r\n|\n/);
@@ -57,22 +61,25 @@ export class DataResultsService {
               }
             }
 
-
-           // console.log(this.area);
-           // console.log(this.cells[0]);
-           // console.log(this.expectedCells);
-           /* this.chart.chartCell.data.labels.push( this.area);
-            this.chart.chartCell.data.datasets[0].data = this.cells;
-            this.chart.chartCell.data.datasets [1].data = this.expectedCells;
-            this.chart.chartCell.update();*/
-            this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members);
+            this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members,  this.emersion, this.expectedEmersion,
+                  this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp);
           }
       );
   }
 
+  getFPR(data) {
+    const csvRecordsArray = (<string> data).split(/\r\n|\n/);
+    for (let i = 1; i < csvRecordsArray.length; i++) {
+      const currentRecord = (<string> csvRecordsArray[i]).split(';');
+      if (currentRecord.length === 3) {
+        this.fpr.push(currentRecord[2].trim());
+      }
+    }
+  }
+
   getData(data) {
     const csvRecordsArray = (data as string).split(/\r\n|\n/);
-    // console.log(csvRecordsArray.length);
+
     for (let i = 14; i < csvRecordsArray.length; i++) {
 
       // let currentRecord = (<string>csvRecordsArray[i]).split(';');
