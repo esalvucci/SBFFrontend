@@ -50,7 +50,9 @@ export class FilterParametersComponent implements OnInit {
   }
 
   disableButton() {
-    return !this.filter.dataSet || !this.filter.nonElemDataSet;
+    return !this.filter.dataSet ||
+        !this.filter.nonElemDataSet ||
+        (this.filter.k !== 0 && this.filter.m === 0);
   }
 }
 

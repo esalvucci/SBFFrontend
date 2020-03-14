@@ -47,6 +47,9 @@ export class HttpServiceService {
       const c1 = await this.readUploadedFileAsText(salt);
       c = c1.toString();
     }
+    if (p === 0) { p = ''; }
+    if (m === 0) { m = ''; }
+    if (k === 0) { k = ''; }
     const body = {
         elem: a,
         non_elem: b,

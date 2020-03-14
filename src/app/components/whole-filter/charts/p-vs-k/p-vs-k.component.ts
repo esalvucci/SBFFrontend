@@ -1,6 +1,5 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
-import {FilterService} from '../../../../services/filter.service';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {WholeFilterService} from '../../../../services/whole-filter.service';
 
