@@ -10,7 +10,7 @@ export class FilterSettingsService {
   p = 0;  // false positive probability
   m = 0;  // cells
   k = 0;  // hash number
-  hash = '4';
+  hash = 'MD4';
   salt;
   dataSet;
   nonElemDataSet;

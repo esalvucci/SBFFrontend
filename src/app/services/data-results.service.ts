@@ -64,7 +64,7 @@ export class DataResultsService {
             }
 
             if (x > 0) {
-              console.log(this.fpr);
+              console.log('recalculating charts');
               this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members, this.emersion, this.expectedEmersion,
                   this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp, this.fpr);
             }
@@ -75,9 +75,9 @@ export class DataResultsService {
   }
 
   getFPR(data) {
-    const csvRecordsArray = (<string> data).split(/\r\n|\n/);
+    const csvRecordsArray = ( <string> data ).split(/\r\n|\n/);
     for (let i = 1; i < csvRecordsArray.length; i++) {
-      const currentRecord = (<string> csvRecordsArray[i]).split(';');
+      const currentRecord = ( <string> csvRecordsArray[i] ).split(';');
       if (currentRecord.length === 3) {
         this.fpr.push(currentRecord[2].trim());
       }

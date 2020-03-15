@@ -26,7 +26,7 @@ export class APrioriSafeChartComponent implements OnInit {
       data: {
         labels: this.data.area,
         datasets: [{
-          label: 'A priori ISEP',
+          label: 'A priori SAFEP',
           borderColor: 'rgb(14, 121, 163)',
           borderWidth: 1,
           fill: false,

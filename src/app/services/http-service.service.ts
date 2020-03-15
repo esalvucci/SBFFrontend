@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 @Injectable({
@@ -42,19 +42,31 @@ export class HttpServiceService {
     console.log('calculate filter');
     const a = await this.readUploadedFileAsText(dataSet);
     const b = await this.readUploadedFileAsText(nonElemDataSet);
-    let c = '';
-    if (salt) {
-      const c1 = await this.readUploadedFileAsText(salt);
-      c = c1.toString();
+
+    let c = 0;
+    if (hash === 'SHA1') {
+      c = 1;
+    } else if (hash === 'MD4') {
+      c = 4;
+    } else if (hash === 'MD5') {
+      c = 5;
     }
+
+    let d = '';
+    if (salt) {
+       d = String(await this.readUploadedFileAsText(salt));
+    }
+    // console.log( String(a).split('\n').length - 1);
+    // console.log( String(b).split('\n').length - 1);
+
     if (p === 0) { p = ''; }
     if (m === 0) { m = ''; }
     if (k === 0) { k = ''; }
     const body = {
         elem: a,
         non_elem: b,
-        hash_: hash,
-        salt_: c,
+        hash_: c,
+        salt_: d,
         p_: p,
         m_: m,
         k_: k
