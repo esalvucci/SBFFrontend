@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Chart} from 'chart.js';
+import {WholeFilterService} from './whole-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class ChartsService {
   chartInterset: Chart = [];
   chartAPriori: Chart = [];
 
-  constructor( ) {}
+  pVSk: Chart = [];
+  pVSm: Chart = [];
+  pVSn: Chart = [];
+
+  constructor(public wholeFilter: WholeFilterService ) {}
 
   updateCharts(area, cells, expectedCells, members, emersion, expectedEmersion, aPrioriIsep,
                isep, isepr, aPrioriSafep, aPrioriFpp, fpp, fpr) {
@@ -23,6 +28,21 @@ export class ChartsService {
     this.updateChartFPP(area, aPrioriFpp, fpp, fpr);
     this.updateChartInterset(area, aPrioriIsep, isep, isepr);
     this.updateChartAPriori(area, aPrioriSafep);
+  }
+
+  updateWholeFilter() {
+    console.log('update whole filter charts');
+    this.pVSk.data.labels.push(this.wholeFilter.k3);
+    this.pVSk.data.datasets[0].data = this.wholeFilter.p3;
+    this.pVSk.update();
+
+    this.pVSm.data.labels.push(this.wholeFilter.m2);
+    this.pVSm.data.datasets[0].data = this.wholeFilter.p2;
+    this.pVSm.update();
+
+    this.pVSn.data.labels.push(this.wholeFilter.n1);
+    this.pVSn.data.datasets[0].data = this.wholeFilter.p1;
+    this.pVSn.update();
   }
 
   updateChartCells(area, cells, expectedCells) {

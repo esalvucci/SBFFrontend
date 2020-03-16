@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {WholeFilterService} from '../../../../services/whole-filter.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-p-vs-k',
@@ -10,15 +11,13 @@ import {WholeFilterService} from '../../../../services/whole-filter.service';
 })
 export class PVsKComponent implements OnInit {
 
-  chart2: Chart = [];
-
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public wholeFilter: WholeFilterService, public csvManager: CsvManagerService) {}
+  constructor(public wholeFilter: WholeFilterService, public csvManager: CsvManagerService, public chart: ChartsService) {}
 
   ngOnInit() {
-    this.chart2 = this.getChart('p-vs-k', this.wholeFilter.k3, this.wholeFilter.p3, 'p vs k', 'k', 'p');
+    this.chart.pVSk = this.getChart('p-vs-k', this.wholeFilter.k3, this.wholeFilter.p3, 'p vs k', 'k', 'p');
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {

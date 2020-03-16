@@ -67,6 +67,8 @@ export class DataResultsService {
               console.log('recalculating charts');
               this.chart.updateCharts(this.area, this.cells, this.expectedCells, this.members, this.emersion, this.expectedEmersion,
                   this.aPrioriIsep, this.isep, this.isepr, this.aPrioriSafep, this.aPrioriFpp, this.fpp, this.fpr);
+
+              this.chart.updateWholeFilter();
             }
           }
       );

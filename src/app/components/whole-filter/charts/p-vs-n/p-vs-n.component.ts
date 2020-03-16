@@ -3,6 +3,7 @@ import {FilterService} from '../../../../services/filter.service';
 import { Chart } from 'chart.js';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {WholeFilterService} from '../../../../services/whole-filter.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-p-vs-n',
@@ -11,14 +12,13 @@ import {WholeFilterService} from '../../../../services/whole-filter.service';
 })
 export class PVsNComponent implements OnInit {
 
-  chart: Chart = [];
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public wholeFilter: WholeFilterService,  public csvManager: CsvManagerService) {}
+  constructor(public wholeFilter: WholeFilterService,  public csvManager: CsvManagerService, public chart: ChartsService) {}
 
   ngOnInit() {
-    this.chart = this.getChart('p-vs-n', this.wholeFilter.n1, this.wholeFilter.p1, 'p vs n', 'n', 'p');
+    this.chart.pVSn = this.getChart('p-vs-n', this.wholeFilter.n1, this.wholeFilter.p1, 'p vs n', 'n', 'p');
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {

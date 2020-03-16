@@ -3,6 +3,7 @@ import { Chart } from 'chart.js';
 import {FilterService} from '../../../../services/filter.service';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {WholeFilterService} from '../../../../services/whole-filter.service';
+import {ChartsService} from '../../../../services/charts.service';
 
 @Component({
   selector: 'app-p-vs-m',
@@ -10,14 +11,14 @@ import {WholeFilterService} from '../../../../services/whole-filter.service';
   styleUrls: ['./p-vs-m.component.sass']
 })
 export class PVsMComponent implements OnInit {
-  chart: Chart = [];
+
   backgroundColor = 'rgb(54, 187, 245, 0.6)';
   borderColor = 'rgb(14, 121, 163)';
 
-  constructor(public whileFilter: WholeFilterService,  public csvManager: CsvManagerService) {}
+  constructor(public whileFilter: WholeFilterService,  public csvManager: CsvManagerService, public chart: ChartsService) {}
 
   ngOnInit() {
-   this.chart = this.getChart('p-vs-m', this.whileFilter.m2, this.whileFilter.p2, 'p vs m', 'm', 'p');
+   this.chart.pVSm = this.getChart('p-vs-m', this.whileFilter.m2, this.whileFilter.p2, 'p vs m', 'm', 'p');
   }
 
   getChart(ctx: string, mylabels, mydata, title: string, xlabel: string, ylabel: string): Chart {
