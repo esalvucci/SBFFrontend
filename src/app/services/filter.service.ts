@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CsvManagerService} from './csv-manager.service';
-import {sync} from 'ionicons/icons';
-import {WholeFilterComponent} from '../components/whole-filter/whole-filter.component';
 import {WholeFilterService} from './whole-filter.service';
 
 @Injectable({

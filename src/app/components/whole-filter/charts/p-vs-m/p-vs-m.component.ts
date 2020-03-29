@@ -65,6 +65,15 @@ export class PVsMComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: xlabel
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (index % 2 === 0) {
+                 // return value.toPrecision(3).split('e')[0] ;
+                  return value + ' B';
+                }
+              },
+              autoSkip: false
             }
           }]
         }

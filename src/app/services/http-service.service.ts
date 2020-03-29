@@ -8,10 +8,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class HttpServiceService {
 
-  // ip = 'https://sbfbackend.herokuapp.com';
-  ip = 'http://localhost:3000';
+  // base = 'https://sbfbackend.herokuapp.com';
+  base = 'http://localhost';
   port = '3000';
-  base = '';
+  ip = this.base + ':' + this.port;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -19,7 +19,6 @@ export class HttpServiceService {
   };
 
   constructor(private http: HttpClient) {
-    this.base = this.ip; // + ':' + this.port;
   }
 
   readUploadedFileAsText = (inputFile) => {
@@ -40,6 +39,7 @@ export class HttpServiceService {
 
   async calculateFilter( dataSet, nonElemDataSet, hash, salt, p, m, k) {
     console.log('calculate filter');
+    console.log(m);
     const a = await this.readUploadedFileAsText(dataSet);
     const b = await this.readUploadedFileAsText(nonElemDataSet);
 
@@ -73,7 +73,7 @@ export class HttpServiceService {
     };
 
    // console.log(body);
-    const url1 = 'http://localhost:3000/save';
+    const url1 = this.ip + '/save';
 
     // tslint:disable-next-line:no-shadowed-variable
     console.log('1');
@@ -90,7 +90,7 @@ export class HttpServiceService {
   }
 
   async calc() {
-    const url2 = 'http://localhost:3000/calculateFilter';
+    const url2 = this.ip + '/calculateFilter';
     // tslint:disable-next-line:no-shadowed-variable
     console.log('3');
     // tslint:disable-next-line:no-shadowed-variable

@@ -13,9 +13,9 @@ export class CsvManagerService {
   private isepr;
 
   constructor(private http: HttpClient, private myHttp: HttpServiceService) {
-    this.stats = this.myHttp.base + '/stats';
-    this.fpr = this.myHttp.base + '/fpr';
-    this.isepr = this.myHttp.base + '/isepr';
+    this.stats = this.myHttp.ip + '/stats';
+    this.fpr = this.myHttp.ip + '/fpr';
+    this.isepr = this.myHttp.ip + '/isepr';
   }
 
   getStats() {

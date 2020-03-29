@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FilterService} from '../../../../services/filter.service';
 import { Chart } from 'chart.js';
 import {CsvManagerService} from '../../../../services/csv-manager.service';
 import {WholeFilterService} from '../../../../services/whole-filter.service';
@@ -65,6 +64,14 @@ export class PVsNComponent implements OnInit {
             scaleLabel: {
               display: true,
               labelString: xlabel
+            },
+            ticks: {
+              callback: (value, index, values) => {
+                if (index % 2 === 0) {
+                  return value + ' K';
+                }
+              },
+              autoSkip: false
             }
           }]
         }

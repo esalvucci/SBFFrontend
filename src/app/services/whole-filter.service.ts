@@ -40,8 +40,12 @@ export class WholeFilterService {
     this.p1.length = 0;
     this.n1.length = 0;
 
+    // let myN = this.n * (0.77);
+    // const step = this.n * (0.53);
+
+    const step = 30000; // this.n * (0.53);
     let myN = this.n * (0.77);
-    const step = this.n * (0.53);
+
     let index = 0;
     while ( index <= 20) {
       const newN = myN;
@@ -53,29 +57,42 @@ export class WholeFilterService {
   }
 
   calculate2() {
+
     this.p2.length = 0;
     this.m2.length = 0;
 
-    const mkIb = this.m / 8192;
+    const step = 100000;
+    let myM = this.m - (9 * step);
+    let index = 0;
+
+    while (index <= 20) {
+      this.m2.push(myM); // Byte
+      this.p2.push(this.calculateP(this.k, myM, this.n));
+      myM = myM + step;
+      index++;
+    }
+
+   /* const mkIb = this.m / 8192;
     let myM = mkIb * (0.1123);
     const step = mkIb * (0.0604);
     let index = 0;
 
     while (index <= 20) {
       const newM = myM * 8192;
-      this.m2.push(this.getStrNum(myM));
+      this.m2.push(this.getStrNum(newM));
       this.p2.push(this.calculateP(this.k, newM, this.n));
       myM = myM + step;
       index++;
-    }
+    }*/
+
   }
 
   calculate3() {
     this.k3.length = 0;
     this.p3.length = 0;
 
-    let myK = 1;
-    const step = Math.round(this.k * (0.20));
+    const step = 1; // Math.round(this.k * (0.20));
+    let myK = this.k - (9 * step);
     let index = 0;
 
     while ( index <= 20) {

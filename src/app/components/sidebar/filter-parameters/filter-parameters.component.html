@@ -2,7 +2,7 @@
   <div class="input-group mb-3 pt-3 flex-column">
 
     <div class="form-group">
-      <p class="text-white"><b>Load dataset</b></p>
+      <p class="text-white"><b>Load elements dataset</b></p>
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="dataSet" (change)="setElemDataSet($event)">
         <label class="custom-file-label" for="dataSet" >{{dataSetName}}</label>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="form-group">
-      <p class="text-white"><b>Load non element data set</b></p>
+      <p class="text-white"><b>Load non elements dataset</b></p>
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="nonElem" (change)="setNonElemDataSet($event)">
         <label class="custom-file-label" for="nonElem" >{{nonELemName}}</label>
@@ -55,13 +55,17 @@
       <label for="inputK" class=" text-white"><b>k</b> &nbsp; Number of hash functions</label>
       <input [(ngModel)]="filter.k" #ctrl="ngModel" id="inputK" type="number" min=0 class="form-control"
              aria-label="number of hash functions" aria-describedby="inputGroup-sizing-default" [disabled]="this.filter.p > 0">
+      <p class="text-danger" [hidden]="!(this.filter.k !== 0 && this.filter.m === 0)"> k and m must be set both</p>
     </div>
 
   </div>
 
+
+
   <div class="row justify-content-center">
     <div class="col-6 ">
-      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn" (click)="calculate()" [disabled]="disableButton()">
+      <button  type="button" class="btn btn-lg btn-block m-2 filter-btn" (click)="calculate()" [disabled]="disableButton()"
+               data-toggle="tooltip" data-placement="bottom" title="Set elements and non elements dataset">
         Calculate filter
       </button>
     </div>
