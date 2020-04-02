@@ -8,8 +8,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class HttpServiceService {
 
-  // base = 'https://sbfbackend.herokuapp.com';
-  base = 'http://localhost';
+   base = 'https://sbfbackend.herokuapp.com';
+  //base = 'http://localhost';
   port = '3000';
   ip = this.base + ':' + this.port;
   httpOptions = {
