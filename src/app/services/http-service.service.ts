@@ -11,7 +11,7 @@ export class HttpServiceService {
    base = 'https://sbfbackend.herokuapp.com';
   //base = 'http://localhost';
   port = '3000';
-  ip = this.base + ':' + this.port;
+  ip = this.base; // + ':' + this.port;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
