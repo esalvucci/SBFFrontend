@@ -9,10 +9,10 @@ import {gzip} from 'pako';
 export class HttpServiceService {
 
 //   base = 'https://sbfbackend01.herokuapp.com';
-//  base = 'https://sbfbackend01.herokuapp.com';
-  base = 'http://localhost';
+  base = 'https://sbfbackend01.herokuapp.com';
+//  base = 'http://localhost';
   port = '3000';
-  ip = this.base + ':' + this.port;
+  ip = this.base; // + ':' + this.port;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
