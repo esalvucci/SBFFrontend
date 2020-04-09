@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {gzip} from 'pako';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,11 @@ export class HttpServiceService {
   async calculateFilter( dataSet, nonElemDataSet, hash, salt, p, m, k) {
     console.log('calculate filter');
     console.log(m);
-    const a = await this.readUploadedFileAsText(dataSet);
+
+    const a = gzip(dataSet, { to: 'string', level: 9 });
+    console.log(a.length);
+
+//    const a = await this.readUploadedFileAsText(dataSet);
     const b = await this.readUploadedFileAsText(nonElemDataSet);
 
     let c = 0;
