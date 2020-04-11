@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Form} from '@angular/forms';
 
 
 @Injectable({
@@ -22,11 +23,6 @@ export class HttpServiceService {
   constructor(private http: HttpClient) {
   }
 
-  sendFiles(formData) {
-    this.http.post(this.ip + '/elem', formData)
-        .subscribe(files => console.log('files', files));
-  }
-
   readUploadedFileAsText = (inputFile) => {
     const temporaryFileReader = new FileReader();
 
@@ -43,49 +39,36 @@ export class HttpServiceService {
     });
   }
 
-  async calculateFilter( dataSet, nonElemDataSet, hash, salt, p, m, k) {
+  async calculateFilter(formData: FormData) {
     console.log('calculate filter');
-    console.log(m);
-    const a = await this.readUploadedFileAsText(dataSet);
-    const b = await this.readUploadedFileAsText(nonElemDataSet);
 
-    let c = 0;
-    if (hash === 'SHA1') {
-      c = 1;
-    } else if (hash === 'MD4') {
-      c = 4;
-    } else if (hash === 'MD5') {
-      c = 5;
-    }
-
-    let d = '';
+/*    let d = '';
     if (salt) {
        d = String(await this.readUploadedFileAsText(salt));
-    }
+    }*/
     // console.log( String(a).split('\n').length - 1);
     // console.log( String(b).split('\n').length - 1);
 
-    if (p === 0) { p = ''; }
+/*    if (p === 0) { p = ''; }
     if (m === 0) { m = ''; }
     if (k === 0) { k = ''; }
-    const body = {
-        elem: a,
-        non_elem: b,
+    const parameters = {
         hash_: c,
-        salt_: d,
         p_: p,
         m_: m,
         k_: k
-    };
+    };*/
 
-   // console.log(body);
+
+    // console.log(body);
+
     const url1 = this.ip + '/save';
-
     // tslint:disable-next-line:no-shadowed-variable
     console.log('1');
     await new Promise((res, _) => {
       // tslint:disable-next-line:no-shadowed-variable
-      this.http.post(url1, body, this.httpOptions).subscribe( _ => res('ok'));
+      this.http.post(url1, formData)
+          .subscribe(files => console.log('files', files));
     });
     console.log('2');
 

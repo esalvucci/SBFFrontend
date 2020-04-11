@@ -42,17 +42,8 @@ export class FilterSettingsService {
     console.log('Has function: ' + this.hash);
   }
 
-  async calculate() {
-    await this.http.calculateFilter(
-        this.dataSet,
-        this.nonElemDataSet,
-        this.hash,
-        this.salt,
-        this.p,
-        this.m,
-        this.k
-    );
-
+  async calculate(formData) {
+    await this.http.calculateFilter(formData);
     this.data.loadData(1);
   }
 

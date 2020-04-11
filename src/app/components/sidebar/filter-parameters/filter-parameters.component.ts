@@ -23,9 +23,24 @@ export class FilterParametersComponent implements OnInit {
 
   calculate() {
 
-    console.log('form data variable :   ' + this.formData.toString());
-    this.http.sendFiles(this.formData);
-    this.filter.calculate();
+    let selectedHhash: number;
+    if (this.filter.hash === 'SHA1') {
+      selectedHhash = 1;
+    } else if (this.filter.hash === 'MD4') {
+      selectedHhash = 4;
+    } else if (this.filter.hash === 'MD5') {
+      selectedHhash = 5;
+    }
+
+    const parameters =  {
+      hash: selectedHhash,
+      p: this.filter.p,
+      m: this.filter.m,
+      k: this.filter.k
+    };
+
+    this.formData.set('parameters', JSON.stringify(parameters));
+    this.filter.calculate(this.formData);
   }
 
   selectHashFunction(event) {
