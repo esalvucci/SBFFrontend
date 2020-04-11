@@ -9,10 +9,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class HttpServiceService {
 
 //   base = 'https://sbfbackend.herokuapp.com';
-  base = 'https://sbfbackend01.herokuapp.com';
-  //base = 'http://localhost';
+//  base = 'https://sbfbackend01.herokuapp.com';
+  base = 'http://localhost';
   port = '3000';
-  ip = this.base; // + ':' + this.port;
+  ip = this.base + ':' + this.port;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -20,6 +20,11 @@ export class HttpServiceService {
   };
 
   constructor(private http: HttpClient) {
+  }
+
+  sendFiles(formData) {
+    this.http.post(this.ip + '/elem', formData)
+        .subscribe(files => console.log('files', files));
   }
 
   readUploadedFileAsText = (inputFile) => {

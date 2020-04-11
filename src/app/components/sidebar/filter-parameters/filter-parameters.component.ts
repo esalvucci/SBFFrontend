@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FilterSettingsService} from '../../../services/filter-settings.service';
+import {HttpServiceService} from '../../../services/http-service.service';
 
 @Component({
   selector: 'app-filter-parameters',
@@ -12,12 +13,18 @@ export class FilterParametersComponent implements OnInit {
   saltName = 'Choose file';
   nonELemName = 'Choose file';
   dataSetName = 'Choose file';
+  formData: FormData;
 
-  constructor(public filter: FilterSettingsService) {}
+  constructor(public filter: FilterSettingsService, private http: HttpServiceService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formData = new FormData();
+  }
 
   calculate() {
+
+    console.log('form data variable :   ' + this.formData.toString());
+    this.http.sendFiles(this.formData);
     this.filter.calculate();
   }
 
@@ -34,19 +41,29 @@ export class FilterParametersComponent implements OnInit {
   setHashSalt(e) {
     const str =  e.target.value;
     this.saltName = (str.substring(str.lastIndexOf('\\') + 1));
+    console.log(e.target.files[0]);
     this.filter.setHashSalt(e.target.files[0]);
+    const file = e.target.files[0];
+    this.formData.append('uploads[]', file, 'HashSalt.txt');
+
   }
 
   setElemDataSet(e) {
     const str =  e.target.value;
     this.dataSetName = (str.substring(str.lastIndexOf('\\') + 1));
+    console.log(e.target.files[0]);
     this.filter.setDataSet(e.target.files[0]);
+    const file = e.target.files[0];
+    this.formData.append('uploads[]', file, 'ElemDataset.csv');
   }
 
   setNonElemDataSet(e) {
     const str =  e.target.value;
     this.nonELemName = (str.substring(str.lastIndexOf('\\') + 1));
+    console.log(e.target.files[0]);
     this.filter.setNonElemDataSet(e.target.files[0]);
+    const file = e.target.files[0];
+    this.formData.append('uploads[]', file, 'NonElemDataset.csv');
   }
 
   disableButton() {
