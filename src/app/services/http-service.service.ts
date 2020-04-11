@@ -10,10 +10,10 @@ import {Form} from '@angular/forms';
 export class HttpServiceService {
 
 //   base = 'https://sbfbackend.herokuapp.com';
-//  base = 'https://sbfbackend01.herokuapp.com';
-  base = 'http://localhost';
-  port = '3000';
-  ip = this.base + ':' + this.port;
+  base = 'https://sbfbackend01.herokuapp.com';
+//  base = 'http://localhost';
+//  port = '3000';
+  ip = this.base; // + ':' + this.port;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -68,7 +68,7 @@ export class HttpServiceService {
     await new Promise((res, _) => {
       // tslint:disable-next-line:no-shadowed-variable
       this.http.post(url1, formData)
-          .subscribe(files => console.log('files', files));
+          .subscribe(_ => res('Ok'));
     });
     console.log('2');
 

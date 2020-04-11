@@ -56,7 +56,6 @@ export class FilterParametersComponent implements OnInit {
   setHashSalt(e) {
     const str =  e.target.value;
     this.saltName = (str.substring(str.lastIndexOf('\\') + 1));
-    console.log(e.target.files[0]);
     this.filter.setHashSalt(e.target.files[0]);
     const file = e.target.files[0];
     this.formData.append('uploads[]', file, 'HashSalt.txt');
@@ -66,7 +65,6 @@ export class FilterParametersComponent implements OnInit {
   setElemDataSet(e) {
     const str =  e.target.value;
     this.dataSetName = (str.substring(str.lastIndexOf('\\') + 1));
-    console.log(e.target.files[0]);
     this.filter.setDataSet(e.target.files[0]);
     const file = e.target.files[0];
     this.formData.append('uploads[]', file, 'ElemDataset.csv');
@@ -75,7 +73,6 @@ export class FilterParametersComponent implements OnInit {
   setNonElemDataSet(e) {
     const str =  e.target.value;
     this.nonELemName = (str.substring(str.lastIndexOf('\\') + 1));
-    console.log(e.target.files[0]);
     this.filter.setNonElemDataSet(e.target.files[0]);
     const file = e.target.files[0];
     this.formData.append('uploads[]', file, 'NonElemDataset.csv');
