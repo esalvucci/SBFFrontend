@@ -78,12 +78,12 @@ export class HttpServiceService {
     return 'ok';
   }
 
-  async calc() {
+  calc() {
     const url2 = this.ip + '/calculateFilter';
     // tslint:disable-next-line:no-shadowed-variable
     console.log('3');
     // tslint:disable-next-line:no-shadowed-variable
-    await new Promise((res, _) => this.http.get(url2).subscribe(_ => {console.log('done'); res('ok'); }));
+    this.http.get(url2).subscribe(_ => {console.log('done')});
     console.log('4');
     return 'ok1';
   }
