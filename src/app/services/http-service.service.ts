@@ -72,7 +72,7 @@ export class HttpServiceService {
     });
     console.log('2');
 
-    await this.calc();
+    this.calc();
 
     console.log('5');
     return 'ok';
