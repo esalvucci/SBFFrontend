@@ -41,6 +41,7 @@ export class FilterParametersComponent implements OnInit {
 
     this.formData.set('parameters', JSON.stringify(parameters));
     this.filter.calculate(this.formData);
+    this.formData = new FormData();
   }
 
   selectHashFunction(event) {

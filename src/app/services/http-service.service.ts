@@ -72,18 +72,18 @@ export class HttpServiceService {
     });
     console.log('2');
 
-    this.calc();
+    await this.calc();
 
     console.log('5');
     return 'ok';
   }
 
-  calc() {
+  async calc() {
     const url2 = this.ip + '/calculateFilter';
     // tslint:disable-next-line:no-shadowed-variable
     console.log('3');
     // tslint:disable-next-line:no-shadowed-variable
-    this.http.get(url2).subscribe(_ => {console.log('done')});
+    await new Promise((res, _) => this.http.get(url2).subscribe(_ => {console.log('done'); res('ok'); }));
     console.log('4');
     return 'ok1';
   }
